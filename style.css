@@ -1,0 +1,391 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Remove default padding */
+ul[class],
+ol[class] {
+    padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Set core body defaults */
+body {
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+    list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+    margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* La page d'accueil */
+
+.logo_index {
+    max-width: 90px;
+    margin: 40px auto;
+    cursor: pointer;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 400px;
+    height: auto;
+    margin: 7em auto;
+    padding: 30px;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.title {
+    color: red;
+    font-weight: bold;
+    font-size: 26px;
+    padding: 10px 20px;
+    margin: 10px 40px;
+}
+
+.inputs {
+    width: 75%;
+    color: rgb(38, 50, 56);
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    margin: 10px 40px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+}
+
+#pass {
+    margin-bottom: 25px;
+}
+
+.inputs:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+}
+
+.button {
+    cursor: pointer;
+    background: red;
+    color: whitesmoke;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid red;
+}
+
+#forgot,
+#creat {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #e1bee7;
+}
+
+#forgot {
+    padding-top: 50px;
+}
+
+a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    text-decoration: none;
+    color: red;
+}
+
+/* La bar de navigation (le header) */
+
+header {
+    display: flex;
+    top: 0;
+    width: 100%;
+    align-items: center;
+    padding: 1% 2%;
+}
+
+.logo {
+    max-width: 90px;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.nav-bar li,
+.nav-bar a,
+footer li,
+footer a {
+    text-decoration: none;
+    list-style: none;
+    font-weight: bolder;
+    font-size: 16px;
+    color: black;
+}
+
+.nav-bar li {
+    display: inline-block;
+    padding: 25px 50px 25px 20px;
+}
+
+.nav-bar li :hover,
+.sousMenu li a :hover {
+    transition: all 0.5s ease 0s;
+    color: red;
+}
+
+.sousMenu {
+    display: none;
+}
+
+.nav-bar li:hover .sousMenu {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1000;
+}
+
+.sousMenu li {
+    border-bottom: 2px solid red;
+}
+
+/* La section de presentation */
+
+#intro_gbaf,
+#partenaires {
+    margin: 0 5%;
+    padding: 2% 0;
+    border-top: 2px solid;
+}
+
+#intro_gbaf ul {
+    margin: 1% 5%;
+    padding: 1% 5%;
+}
+
+#illustration1 {
+    width: 60vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.connexion h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+/* La section des partenaires */
+
+.partenaire {
+    border: red solid 2px;
+    border-radius: 30px;
+    display: grid;
+    margin: 20px 50px;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.logo_partenaire img {
+    max-width: 150px;
+}
+
+.logo_partenaire {
+    grid-area: 1 / 1 / 4 / 2;
+}
+.nom_partenaire {
+    grid-area: 1 / 2 / 2 / 3;
+    font-size: 20px;
+}
+.contenu_partenaire {
+    grid-area: 2 / 2 / 3 / 3;
+}
+.lireLaSuite_partenaire {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+.button {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* la page de chaque acteur */
+
+.fiche_partenaire {
+    display: flex;
+    border: red solid 2px;
+    border-radius: 30px;
+    flex-direction: column;
+    margin: 20px 50px;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tableau_de_bord {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 2% 5%;
+}
+
+.commentairesActeur {
+    border: red solid 2px;
+    border-radius: 30px;
+    flex-direction: column;
+    margin: 20px 50px;
+    padding: 30px;
+}
+
+.commentaire {
+    border: red solid 2px;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+/* La pied de page (le footer) */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+footer li {
+    display: inline-block;
+    padding: 5px 20px;
+}
+
+footer li a:hover {
+    transition: all 0.5s ease 0s;
+    color: red;
+}
+
+/* La version mobile */
+
+@media (max-width: 600px) {
+    header {
+        display: block;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-bar li {
+        text-align: center;
+        padding: 25px 20px;
+        width: 100%;
+    }
+
+    .partenaire {
+        border: red solid 2px;
+        border-radius: 30px;
+        display: grid;
+        margin: 20px 50px;
+        padding: 10px;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+
+    .logo_partenaire {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    .nom_partenaire {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    .contenu_partenaire {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+    .lireLaSuite_partenaire {
+        grid-area: 4 / 1 / 5 / 2;
+    }
+
+    .main {
+        border-radius: 0px;
+    }
+}
