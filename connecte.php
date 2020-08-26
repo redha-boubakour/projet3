@@ -1,24 +1,20 @@
         <?php 
         session_start(); 
     
-        $_SESSION['compte'] = 'compte_test';
-        $_SESSION['mdp'] = 'mdp_test';
+        $_SESSION['login'] = 'compte_test';
+        $_SESSION['pass'] = 'mdp_test';
 
         $_SESSION['auth']['compte'];
         $_SESSION['flash']['message'];
         $_SESSION['flash']['class'];
         ?>
 
-        <?php setcookie('cookie_test', $_POST['compte'], time() + 365*24*3600, null, null, false, true); ?>
-
-        <?php include("header.php"); ?>
-
         <?php
-            if (isset($_POST['mdp']) AND $_POST['mdp'] ==  "mdp_test" AND isset($_POST['compte']) AND $_POST['compte'] ==  "compte_test")
+            if (isset($_POST['pass']) AND $_POST['pass'] ==  "mdp_test" AND isset($_POST['login']) AND $_POST['login'] ==  "compte_test")
             {
         ?>
 
-        <h1>Bonjour, <?php echo $_COOKIE['cookie_test'];?></h1>
+        <?php include("header.php"); ?>
 
         <section id="presentation">
             <h1 id="intro_gbaf">

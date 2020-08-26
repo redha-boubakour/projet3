@@ -21,9 +21,9 @@
                 <p><?= (!empty($_POST) && empty($_POST['nouveau_mail'])) ?  "l'adresse email est vide" : '' ?></p>
                 <p><?= isset($errors['nouveau_mail']) ? $errors ['nouveau_mail'] : '' ?></p>
 
-                <p><input class="inputs" type="password"    name="nouveau_mdp" id="nouveau_mdp" placeholder="Votre mot de passe"></>
-                <p><input class="inputs" type="password"    name="nouveau_mdp_confirmation"    id="nouveau_mdp_confirmation" placeholder="Confirmer votre mot de passe"></p>
-                <button class="button" name="inscription">S'inscrire</button>
+                <p><input class="inputs" type="password" name="nouveau_mdp" id="nouveau_mdp" placeholder="Votre mot de passe"></>
+                <p><input class="inputs" type="password" name="nouveau_mdp_confirmation"    id="nouveau_mdp_confirmation" placeholder="Confirmer votre mot de passe"></p>
+                <button type="submit" class="button" name="inscription">S'inscrire</button>
             </form>
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>

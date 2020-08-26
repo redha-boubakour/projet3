@@ -14,13 +14,13 @@
         <img class="logo_index" src="./images/logo.png" alt="logo">
         <div class="main">
             <p class="title">Connexion</p>
-            <form method="post" class="form">
+            <form action="connecte.php" method="post" class="form">
                 <input class="inputs" id="login" name="login" type="text" placeholder="Votre compte">
                 <input class="inputs" id="pass" name="pass" type="password" placeholder="Votre mot de passe">
-                <button class="button" name="connexion">Se connecter</button>
-                <p class="other_page" id="forgot"><a href="#">Mot de passe oublié ?</p>
-                <p class="other_page"><a href="inscription.php">Creer un compte</p>
-            </form>            
+                <button type="submit" class="button" name="connect">Se connecter</button>
+            </form> 
+            <p class="other_page" id="forgot"><a href="#">Mot de passe oublié ?</p>
+            <p class="other_page"><a href="inscription.php">Creer un compte</p>
         </div>
     </body>
 </html>

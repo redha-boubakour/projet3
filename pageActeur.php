@@ -7,8 +7,6 @@
         
         <?php include("header.php"); ?>
 
-        <h1>Bonjour, <?php echo $_COOKIE['cookie_test'];?></h1>
-
         <section class="fiche_partenaire">
             <div class="logo_partenaire"><img src="./images/" alt="logo du partenaire"></div>
             <h3 class="nom_partenaire">Nom du partenaire</h3>
