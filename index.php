@@ -18,8 +18,8 @@
                 <input class="inputs" id="login" name="login" type="text" placeholder="Votre compte">
                 <input class="inputs" id="pass" name="pass" type="password" placeholder="Votre mot de passe">
                 <button class="button" name="connexion">Se connecter</button>
-                <p id="forgot"><a href="#">Mot de passe oublié ?</p>
-                <p id="creat"><a href="inscription.php">Creer un compte</p>
+                <p class="other_page" id="forgot"><a href="#">Mot de passe oublié ?</p>
+                <p class="other_page"><a href="inscription.php">Creer un compte</p>
             </form>            
         </div>
     </body>
