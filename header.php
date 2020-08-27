@@ -12,14 +12,14 @@
     </head>
 
     <body>       
-        <header id="header">
+        <header>
             <img src="./images/logo.png" class="logo" id="header-img" alt="logo"/>
-            <nav class="nav-bar" id="nav-bar">
+            <nav class="nav_bar" id="nav_bar">
                 <ul class="menu">
-                    <li><a href="#" class="nav-link">Compte<a>
-                        <ul class="sousMenu">
-                            <li><a href="seConnecter.php">Se connecter</a></li>
-                            <li><a href="inscription.php">Creer un compte</a></li>
+                    <li><a href="#" class="nav_link">Compte<a>
+                        <ul class="sub_menu">
+                            <li><a href="#">profil</a></li>
+                            <li><a href="index.php">Se déconnecter</a></li>
                         </ul>
                     </li>
                 </ul>
