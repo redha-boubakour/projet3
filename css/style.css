@@ -13,7 +13,7 @@
     text-align: center;
     flex-direction: column;
     background-color: #ffffff;
-    width: 400px;
+    width: 500px;
     height: auto;
     margin: 4em auto;
     padding: 30px;
@@ -22,7 +22,7 @@
 }
 
 .title {
-    color: red;
+    color: #fe654f;
     font-weight: bold;
     font-size: 26px;
     padding: 10px 20px;
@@ -50,7 +50,7 @@
 
 .button {
     cursor: pointer;
-    background: red;
+    background: #fe654f;
     color: whitesmoke;
     font-weight: 700;
     font-size: 14px;
@@ -58,7 +58,7 @@
     padding: 10px 20px;
     border-radius: 20px;
     outline: none;
-    border: 2px solid red;
+    border: 2px solid #fe654f;
 }
 
 #forgot {
@@ -73,7 +73,7 @@
 a {
     text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
     text-decoration: none;
-    color: red;
+    color: #fe654f;
 }
 
 /* La bar de navigation (le header) */
@@ -111,7 +111,7 @@ footer a {
 .nav_bar li :hover,
 .sub_menu li a :hover {
     transition: all 0.5s ease 0s;
-    color: red;
+    color: #fe654f;
 }
 
 .sub_menu {
@@ -127,10 +127,20 @@ footer a {
 }
 
 .sub_menu li {
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid #fe654f;
 }
 
 /* La section de presentation */
+
+.main_2 {
+    background-color: #ffffff;
+    width: 90%;
+    height: auto;
+    margin: 4em auto;
+    padding: 30px;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
 
 #intro_gbaf,
 #partenaires {
@@ -160,7 +170,7 @@ footer a {
 /* La section des partenaires */
 
 .partenaire {
-    border: red solid 2px;
+    border: #fe654f solid 2px;
     border-radius: 30px;
     display: grid;
     margin: 20px 50px;
@@ -192,7 +202,7 @@ footer a {
 }
 
 .button {
-    background-color: red;
+    background-color: #fe654f;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -208,7 +218,7 @@ footer a {
 
 .fiche_partenaire {
     display: flex;
-    border: red solid 2px;
+    border: #fe654f solid 2px;
     border-radius: 30px;
     flex-direction: column;
     margin: 20px 50px;
@@ -227,7 +237,7 @@ footer a {
 }
 
 .commentairesActeur {
-    border: red solid 2px;
+    border: #fe654f solid 2px;
     border-radius: 30px;
     flex-direction: column;
     margin: 20px 50px;
@@ -235,7 +245,7 @@ footer a {
 }
 
 .commentaire {
-    border: red solid 2px;
+    border: #fe654f solid 2px;
     border-radius: 30px;
     padding: 30px;
 }
@@ -258,7 +268,7 @@ footer li {
 
 footer li a:hover {
     transition: all 0.5s ease 0s;
-    color: red;
+    color: #fe654f;
 }
 
 /* La version mobile */
@@ -271,6 +281,11 @@ footer li a:hover {
         width: 100%;
     }
 
+    .logo {
+        max-width: 110px;
+        margin: 0px auto;
+    }
+
     .nav_bar li {
         text-align: center;
         padding: 25px 20px;
@@ -278,7 +293,7 @@ footer li a:hover {
     }
 
     .partenaire {
-        border: red solid 2px;
+        border: #fe654f solid 2px;
         border-radius: 30px;
         display: grid;
         margin: 20px 50px;

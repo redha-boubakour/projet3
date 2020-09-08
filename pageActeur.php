@@ -1,9 +1,4 @@
-        <?php 
-        session_start(); 
-    
-        $_SESSION['compte'] = 'compte_test';
-        $_SESSION['mdp'] = 'mdp_test';
-        ?>
+       
         
         <?php include("header.php"); ?>
 
