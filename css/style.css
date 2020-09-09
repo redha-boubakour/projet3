@@ -80,7 +80,6 @@ a {
 
 header {
     display: flex;
-    top: 0;
     width: 100%;
     align-items: center;
     padding: 1% 2%;
@@ -105,7 +104,6 @@ footer a {
 
 .nav_bar li {
     display: inline-block;
-    padding: 25px 50px 25px 20px;
 }
 
 .nav_bar li :hover,
@@ -136,20 +134,19 @@ footer a {
     background-color: #ffffff;
     width: 90%;
     height: auto;
-    margin: 4em auto;
+    margin: 2em auto;
     padding: 30px;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
 
-#intro_gbaf,
+.intro_gbaf,
 #partenaires {
     margin: 0 5%;
     padding: 2% 0;
-    border-top: 2px solid;
 }
 
-#intro_gbaf ul {
+.intro_gbaf ul {
     margin: 1% 5%;
     padding: 1% 5%;
 }
@@ -173,7 +170,7 @@ footer a {
     border: #fe654f solid 2px;
     border-radius: 30px;
     display: grid;
-    margin: 20px 50px;
+    margin: 20px 100px;
     padding: 10px;
     align-items: center;
     justify-items: center;
@@ -259,6 +256,7 @@ footer {
     justify-content: center;
     width: 100%;
     align-items: center;
+    margin-top: 30px;
 }
 
 footer li {

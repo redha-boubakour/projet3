@@ -1,4 +1,5 @@
 <?php  
+session_start();
 
 try
         {
@@ -11,7 +12,35 @@ try
 
 if(isset($_POST['modify']))
 {
+    $pass_hache = $_POST['new_password'];
+    $pass_hache_conf = $_POST['new_password_conf'];
+    $email = $_SESSION['email'];
 
+    if(!empty($_POST['new_password']) AND !empty($_POST['new_password_conf']))
+    {
+        if($pass_hache == $pass_hache_conf)
+        {
+            $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
+            $req = $bdd->prepare("
+                        UPDATE user
+                        SET password = '$pass_hache'
+                        WHERE email = '$email'
+                    ");
+            $req->execute();
+
+            $_SESSION['password_modified'] = "Votre mot de passe a été modifié.";
+            header('Location: index.php');
+            exit();
+        }
+        else
+        {
+            $error = "Vos Mots de passe ne correspondent pas.";
+        }
+    }
+    else
+    {
+        $error = 'Tous les champs doivent être complétés.';
+    }
 }
 
 ?>

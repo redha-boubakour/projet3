@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if(isset($_POST['submit']))
 {
 
@@ -32,7 +32,6 @@ try
                 {
                     if(isset($checkanswer) AND $checkanswer == $userinfo['answer'])
                     {             
-                        $_SESSION['password'] = $userinfo['password'];
                         header('Location: nouveaumotdepasse.php');   
                         exit();
                     }

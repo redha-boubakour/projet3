@@ -34,8 +34,6 @@ if(isset($_POST['connect']))
                 header('Location: connecte.php');
                 exit();
             }
-            
-            
         }
         else
         {
