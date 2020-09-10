@@ -281,13 +281,12 @@ footer li a:hover {
 
     .logo {
         max-width: 110px;
-        margin: 0px auto;
+        margin: 20px auto;
     }
 
     .nav_bar li {
-        text-align: center;
-        padding: 25px 20px;
-        width: 100%;
+        max-width: 100%;
+        margin: 0 15px;
     }
 
     .partenaire {
