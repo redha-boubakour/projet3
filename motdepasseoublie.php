@@ -13,7 +13,7 @@ try
     }
 
     $checkaccount = htmlspecialchars($_POST['email']);
-    $checkanswer = htmlspecialchars($_POST['answer']);
+    
 
     if(!empty($checkaccount)) 
     {
@@ -27,7 +27,8 @@ try
             {
                 $_SESSION['email'] = $userinfo['email'];
                 $_SESSION['question'] = $userinfo['question'];
-                
+                $checkanswer = htmlspecialchars($_POST['answer']);
+
                 if(!empty($checkanswer))
                 {
                     if(isset($checkanswer) AND $checkanswer == $userinfo['answer'])
@@ -79,22 +80,20 @@ try
             <form method="post" class="form">
                 <input class="inputs" type="text" name="email" placeholder="Votre adresse mail" value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>">
 
-                <?php if(isset($_SESSION['email'])) { ?>
+                <?php if(isset($_SESSION['email'])) : ?>
 
-                <p><?php echo $_SESSION['question']; ?></p>
+                <p><?= $_SESSION['question']; ?></p>
                 <input class="inputs" type="text" name="answer" placeholder="Votre réponse">
 
-                <?php } ?>
+                <?php endif; ?>
 
                 <button type="submit" class="button" name="submit">Valider</button>
             </form> 
             
-            <?php
-                if(isset($error))
-                {
-                    echo $error;
-                }
-            ?>
+            <?php if(isset($error)) : ?>
+                <p><?= $error ?></p>
+            <?php endif; ?>
+            
 
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>

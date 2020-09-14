@@ -25,6 +25,7 @@ if(isset($_POST['connect']))
         if (!empty($userinfo))
         {
             if (password_verify($passconnect, $userinfo['password'])) {
+                $_SESSION['id'] = $userinfo['id'];
                 $_SESSION['username'] = $userinfo['username'];
                 $_SESSION['email'] = $userinfo['email'];
                 $_SESSION['firstname'] = $userinfo['firstname'];

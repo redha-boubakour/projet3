@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'])
+if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'] AND $_SESSION['id'])
 {
 
     try
@@ -44,7 +44,9 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     <?php
     while ($actorinfo = $req->fetch())
     {
-        $_SESSION['id'] = $actorinfo['id'];
+        $_GET['id'] = $actorinfo['id'];
+        $id = $_GET['id'];
+
 
         if (strlen($actorinfo['content']) > 100)
         {
@@ -52,10 +54,10 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     ?>
 
     <div class="partenaire">
-        <div class="logo_partenaire"><?php echo htmlspecialchars($actorinfo['logo']); ?></div>
+        <img src="<?php echo $actorinfo['logo']; ?>" class="logo_partenaire" alt="logo"/>
         <h3 class="nom_partenaire"><?php echo htmlspecialchars($actorinfo['name']); ?></h3>
         <div class="contenu_partenaire"><?php echo htmlspecialchars($extract); ?></div>
-        <div class="lireLaSuite_partenaire"><button class="button" onclick="window.location.href='pageActeur.php'">Lire la suite</button></div>
+        <div class="lireLaSuite_partenaire"><button class="button" onclick="window.location.href='pageActeur.php?id=<?php echo $id; ?>'">Lire la suite</button></div>
     </div>
 
     <?php

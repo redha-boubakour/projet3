@@ -1,13 +1,6 @@
 <?php  
 
-try
-        {
-	        $bdd = new PDO('mysql:host=localhost:3308;dbname=gbaf2;charset=utf8', 'root', '');
-        }
-            catch(Exception $e)
-        {
-            die('Erreur : '.$e->getMessage());
-        }
+require 'sql.php';
 
 // Vérification de la validité des informations
 
@@ -26,9 +19,8 @@ if(isset($_POST['registration']))
     {
         if(filter_var($new_email, FILTER_VALIDATE_EMAIL))
         {
-            $reqemail = $bdd->prepare('SELECT * FROM user WHERE email = ?');
-            $reqemail->execute(array($new_email));
-            $existingemail = $reqemail->rowCount();
+            $existingemail = getUserIfExist($new_email);
+
             if($existingemail == 0)
             {
                 if($pass_hache == $pass_hache_conf)
