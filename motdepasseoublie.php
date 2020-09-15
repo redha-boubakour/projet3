@@ -3,14 +3,7 @@ session_start();
 if(isset($_POST['submit']))
 {
 
-try
-    {
-	    $bdd = new PDO('mysql:host=localhost:3308;dbname=gbaf2;charset=utf8', 'root', '');
-    }
-    catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+require 'sql.php';
 
     $checkaccount = htmlspecialchars($_POST['email']);
     

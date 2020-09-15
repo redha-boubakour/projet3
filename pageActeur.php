@@ -4,14 +4,7 @@ session_start();
 if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'] AND $_SESSION['id'])
 {
 
-    try
-    {
-	    $bdd = new PDO('mysql:host=localhost:3308;dbname=gbaf2;charset=utf8', 'root', '');
-    }
-        catch(Exception $e)
-    {
-        die('Erreur : '.$e->getMessage());
-    }
+    require 'sql.php';
 
     if(isset($_GET['id']))
     {
@@ -52,11 +45,60 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         }
     }
 
-    $req = $bdd->query('SELECT * FROM comment ORDER BY created_at DESC');
+    $req2 = $bdd->query('SELECT * FROM comment ORDER BY created_at DESC');
 
-    $req2 = $bdd->query("SELECT * FROM comment WHERE actor_id = '{$_GET[ "id" ]}'");
-    $count = $req2->rowCount();
+    $req3 = $bdd->query("SELECT * FROM comment WHERE actor_id = '{$_GET[ "id" ]}'");
+    $count = $req3->rowCount();
 
+    if(isset($_POST['positive-btn']) OR isset($_POST['negative-btn']))
+    {            
+        $actor_id = $_GET['id'];
+        $login_id = $_SESSION['id'];
+
+        $add_vote = $bdd->prepare('
+            INSERT INTO vote(vote, actor_id, login_id)
+            VALUES(:vote, :actor_id, :login_id)
+        ');
+
+        if(isset($_POST['positive-btn']))
+        {
+            $add_vote->execute(array(
+                'vote' => 1,
+                'actor_id' => $actor_id,
+                'login_id' => $login_id
+            ));
+            
+            $req5 = $bdd->prepare("
+                UPDATE actor
+                SET positive_vote = positive_vote + 1
+                WHERE id = '{$_GET[ "id" ]}'
+            ");
+            $req5->execute();
+
+            header('Location: pageActeur.php?id='.$actorinfo['id']);
+        }
+        elseif (isset($_POST['negative-btn']))
+        {
+            $add_vote->execute(array(
+                'vote' => 0,
+                'actor_id' => $actor_id,
+                'login_id' => $login_id
+            ));
+
+            $req5 = $bdd->prepare("
+                UPDATE actor
+                SET negative_vote = negative_vote + 1
+                WHERE id = '{$_GET[ "id" ]}'
+            ");
+            $req5->execute();
+
+            header('Location: pageActeur.php?id='.$actorinfo['id']);
+        }
+    }
+
+    $req6 = $bdd->query("SELECT * FROM vote WHERE (login_id = '{$_SESSION['id']}' AND actor_id = '{$_GET[ "id" ]}')");
+    $voteinfo = $req6->fetch();
+    
 ?>
 
 <?php include("header.php"); ?>
@@ -71,9 +113,28 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     <section class="comment_section">
             
         <div class="tableau_de_bord">
-            <div class="total_comment"><?php echo $count ?> Commentaires</div>
+            <div class="total_comments"><?php echo $count ?> Commentaires</div>
             <div class="evaluation">
-                Evaluation globale
+                <form method="post" class="form">
+                    <?php echo $actorinfo['positive_vote']; ?>
+                    <button name="positive-btn" id="positive-btn"
+                        <?php 
+                        if($voteinfo['login_id'] == $_SESSION['id'] AND !is_null($voteinfo['vote']))
+                        { 
+                            echo ' Disabled'; 
+                        } 
+                        ?>
+                    ><img src="./images/thumbs-up.png"></button>
+                    <?php echo $actorinfo['negative_vote']; ?>
+                    <button name="negative-btn" id="negative-btn"
+                        <?php 
+                        if(isset($voteinfo['login_id']) AND !is_null($voteinfo['vote']))
+                        { 
+                            echo ' Disabled'; 
+                        } 
+                        ?>
+                    ><img src="./images/thumbs-down.png"></button>
+                </form>
             </div>
         </div>
 
@@ -92,7 +153,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         </div>
 
     <?php
-        while ($commentinfo = $req->fetch())
+        while ($commentinfo = $req2->fetch())
         {
             if($_GET['id'] == $commentinfo['actor_id']) 
             {
