@@ -60,22 +60,24 @@ if(isset($_POST['connect']))
         <title>GBAF</title>
     </head>
     <body>
-        <img class="logo_index" src="./images/logo.png" alt="logo">
-        <div class="main">
-            <?php if (isset($_SESSION['account_created'])) {echo $_SESSION['account_created'];} ?>
-            <h1 class="title">Connexion</h1>
-            <form method="post" class="form">
-                <input class="inputs" id="login" name="login" type="text" placeholder="Votre compte">
-                <input class="inputs" id="pass" name="pass" type="password" placeholder="Votre mot de passe">
-                <button type="submit" class="button" name="connect">Se connecter</button>
-            </form> 
-            
-            <?php if(isset($error)) : ?>
-                <div class="error"><p><?= $error ?></p></div>
-            <?php endif; ?>
+        <section class="main_container">
+            <img class="logo_index" src="./images/logo.png" alt="logo">
+            <div class="main">
+                <?php if (isset($_SESSION['account_created'])) {echo $_SESSION['account_created'];} ?>
+                <h1 class="title">Connexion</h1>
+                <form method="post" class="form">
+                    <input class="inputs" id="login" name="login" type="text" placeholder="Votre compte">
+                    <input class="inputs" id="pass" name="pass" type="password" placeholder="Votre mot de passe">
+                    <button type="submit" class="button" name="connect">Se connecter</button>
+                </form> 
+                
+                <?php if(isset($error)) : ?>
+                    <div class="error"><p><?= $error ?></p></div>
+                <?php endif; ?>
 
-            <p class="other_page" id="forgot"><a href="motdepasseoublie.php">Mot de passe oublié ?</p>
-            <p class="other_page"><a href="inscription.php">Créer un compte</p>
-        </div>
+                <p class="other_page" id="forgot"><a href="motdepasseoublie.php">Mot de passe oublié ?</p>
+                <p class="other_page"><a href="inscription.php">Créer un compte</p>
+            </div>
+        </section>
     </body>
 </html>

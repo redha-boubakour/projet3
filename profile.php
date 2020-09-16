@@ -9,21 +9,30 @@ if (isset($_SESSION['id']))
 
     if(isset($_POST['modify-username-btn']))
     {
-        $new_username = $_POST['new_username'];
+        $new_username = htmlspecialchars($_POST['new_username']);
 
         if(!empty($new_username))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET username = '$new_username'
-                WHERE id = '$id'
-            ");
-            $req->execute();
+            $existingusername = getUserUsernamefExist($new_username);
 
-            $_SESSION['username'] = $new_username;
+            if($existingusername == 0)
+            {    
+                $req = $bdd->prepare("
+                    UPDATE user
+                    SET username = '$new_username'
+                    WHERE id = '$id'
+                ");
+                $req->execute();
 
-            header('Location: profile.php');
-            exit();
+                $_SESSION['username'] = $new_username;
+
+                header('Location: profile.php');
+                exit();
+            }
+            else
+            {
+                $error = "nom de compte déjà utilisé.";
+            }
         }
         else
         {
@@ -64,31 +73,48 @@ if (isset($_SESSION['id']))
 
     if(isset($_POST['modify-email-btn']))
     {
-        $new_email = $_POST['new_email'];
+        $new_email = htmlspecialchars($_POST['new_email']);
 
         if(!empty($new_email))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET email = '$new_email'
-                WHERE id = '$id'
-            ");
-            $req->execute();
+            if(filter_var($new_email, FILTER_VALIDATE_EMAIL))
+            {
+                $existingemail = getUserEmailIfExist($new_email);
 
-            $_SESSION['email'] = $new_email;
+                if($existingemail == 0)
+                {
+                        $req = $bdd->prepare("
+                            UPDATE user
+                            SET email = '$new_email'
+                            WHERE id = '$id'
+                        ");
+                        $req->execute();
 
-            header('Location: profile.php');
-            exit();
+                        $_SESSION['email'] = $new_email;
+
+                        header('Location: profile.php');
+                        exit();
+                }
+                else
+                {
+                    $error = "Adresse mail déjà utilisée.";
+                }
+            }
+            else
+            {
+                $error = "Votre adresse mail n'est pas valide.";
+            }
         }
         else
         {
             $error = 'le champ relatif au mail doit être complété.';
         }
+
     }
 
     if(isset($_POST['modify-firstname-btn']))
     {
-        $new_firstname = $_POST['new_firstname'];
+        $new_firstname = htmlspecialchars($_POST['new_firstname']);
 
         if(!empty($new_firstname))
         {
@@ -112,7 +138,7 @@ if (isset($_SESSION['id']))
 
         if(isset($_POST['modify-lastname-btn']))
     {
-        $new_lastname = $_POST['new_lastname'];
+        $new_lastname = htmlspecialchars($_POST['new_lastname']);
 
         if(!empty($new_lastname))
         {
@@ -136,7 +162,7 @@ if (isset($_SESSION['id']))
 
     if(isset($_POST['modify-question-btn']))
     {
-        $new_question = $_POST['new_question'];
+        $new_question = htmlspecialchars($_POST['new_question']);
 
         if(!empty($new_question))
         {
@@ -160,7 +186,7 @@ if (isset($_SESSION['id']))
 
     if(isset($_POST['modify-answer-btn']))
     {
-        $new_answer = $_POST['new_answer'];
+        $new_answer = htmlspecialchars($_POST['new_answer']);
 
         if(!empty($new_answer))
         {

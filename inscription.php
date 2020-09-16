@@ -19,7 +19,7 @@ if(isset($_POST['registration']))
     {
         if(filter_var($new_email, FILTER_VALIDATE_EMAIL))
         {
-            $existingemail = getUserIfExist($new_email);
+            $existingemail = getUserEmailIfExist($new_email);
 
             if($existingemail == 0)
             {

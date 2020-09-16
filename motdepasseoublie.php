@@ -9,7 +9,7 @@ require 'sql.php';
 
     if(!empty($checkaccount)) 
     {
-        $requser =  $bdd->prepare('SELECT * FROM user WHERE email = ?');
+        $requser = $bdd->prepare('SELECT * FROM user WHERE email = ?');
         $requser->execute(array($checkaccount));
         $userinfo = $requser->fetch();
 
