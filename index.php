@@ -16,7 +16,7 @@ if(isset($_POST['connect']))
         $requser->execute(array($loginconnect));
         $userinfo = $requser->fetch();
         
-        if (!empty($userinfo))
+        if ($userinfo['username'])
         {
             if (password_verify($passconnect, $userinfo['password'])) {
                 $_SESSION['id'] = $userinfo['id'];
@@ -28,6 +28,10 @@ if(isset($_POST['connect']))
                 $_SESSION['answer'] = $userinfo['answer'];
                 header('Location: connecte.php');
                 exit();
+            }
+            else
+            {
+                $error = "Compte inexistant ou mot de passe incorrect.";
             }
         }
         else
@@ -66,12 +70,9 @@ if(isset($_POST['connect']))
                 <button type="submit" class="button" name="connect">Se connecter</button>
             </form> 
             
-            <?php
-                if(isset($error))
-                {
-                    echo $error;
-                }
-            ?>
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
 
             <p class="other_page" id="forgot"><a href="motdepasseoublie.php">Mot de passe oublié ?</p>
             <p class="other_page"><a href="inscription.php">Créer un compte</p>

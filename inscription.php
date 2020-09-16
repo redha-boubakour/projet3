@@ -99,12 +99,9 @@ if(isset($_POST['registration']))
                 <button type="submit" class="button" name="registration">S'inscrire</button>
             </form>
 
-            <?php
-                if(isset($error))
-                {
-                    echo $error;
-                }
-            ?>
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
 
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>

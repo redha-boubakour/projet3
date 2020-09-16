@@ -6,7 +6,6 @@ if(isset($_POST['submit']))
 require 'sql.php';
 
     $checkaccount = htmlspecialchars($_POST['email']);
-    
 
     if(!empty($checkaccount)) 
     {
@@ -20,23 +19,27 @@ require 'sql.php';
             {
                 $_SESSION['email'] = $userinfo['email'];
                 $_SESSION['question'] = $userinfo['question'];
-                $checkanswer = htmlspecialchars($_POST['answer']);
 
-                if(!empty($checkanswer))
+                if(isset($_POST['answer']))
                 {
-                    if(isset($checkanswer) AND $checkanswer == $userinfo['answer'])
-                    {             
-                        header('Location: nouveaumotdepasse.php');   
-                        exit();
+                    $checkanswer = htmlspecialchars($_POST['answer']);
+
+                    if(!empty($checkanswer))
+                    {
+                        if(isset($checkanswer) AND $checkanswer == $userinfo['answer'])
+                        {             
+                            header('Location: nouveaumotdepasse.php');   
+                            exit();
+                        }
+                        else
+                        {
+                            $error = "Mauvaise réponse.";
+                        }
                     }
                     else
                     {
-                        $error = "Mauvaise réponse.";
+                        $error = "le champ doit être complété.";
                     }
-                }
-                else
-                {
-                    $error = "le champ doit être complété.";
                 }
             }
         }
@@ -69,7 +72,6 @@ require 'sql.php';
         <img class="logo_index" src="./images/logo.png" alt="logo">
         <div class="main">
             <h1 class="title">Mot de passe oublié ?</h1>
-            <p>Veuillez rentrer votre adresse mail</p>
             <form method="post" class="form">
                 <input class="inputs" type="text" name="email" placeholder="Votre adresse mail" value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>">
 
@@ -84,7 +86,7 @@ require 'sql.php';
             </form> 
             
             <?php if(isset($error)) : ?>
-                <p><?= $error ?></p>
+                <div class="error"><p><?= $error ?></p></div>
             <?php endif; ?>
             
 

@@ -154,13 +154,9 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
                 <button type="submit" class="button" name="submit_comment_btn">Valider</button>
             </form>
 
-            <?php
-            if(isset($error))
-            {
-                echo $error;
-            }
-            ?>
-
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
         </div>
 
     <?php

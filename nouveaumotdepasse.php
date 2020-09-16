@@ -22,7 +22,7 @@ if(isset($_POST['modify']))
             $req->execute();
 
             $_SESSION['password_modified'] = "Votre mot de passe a été modifié.";
-            header('Location: index.php');
+            header('Location: deconnexion.php');
             exit();
         }
         else
@@ -61,12 +61,9 @@ if(isset($_POST['modify']))
                 <button type="submit" class="button" name="modify">Modifier votre mot de passe</button>
             </form> 
             
-            <?php
-                if(isset($error))
-                {
-                    echo $error;
-                }
-            ?>
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
             
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>
