@@ -1,10 +1,14 @@
 <?php 
 session_start();
 
+/* Verification de l'existance des variables SESSION */
+
 if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'] AND $_SESSION['id'])
 {
 
     require 'sql.php';
+
+    /* Verification de l existance des acteurs */
 
     if(isset($_GET['id']))
     {
@@ -16,6 +20,8 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         echo "Acteur inconnu";
     }
 
+    /* Partie création commentaire */
+    
     if(isset($_POST['submit_comment_btn']))
     {
         if(!empty($_POST['insert_comment']))
@@ -47,8 +53,12 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
     $req2 = $bdd->query('SELECT * FROM comment ORDER BY created_at DESC');
 
+    /* le total des commentaires - acteur */
+
     $req3 = $bdd->query("SELECT * FROM comment WHERE actor_id = '{$_GET[ "id" ]}'");
     $count = $req3->rowCount();
+
+    /* Partie systeme de votes */
 
     if(isset($_POST['positive-btn']) OR isset($_POST['negative-btn']))
     {            
@@ -98,7 +108,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
     $req6 = $bdd->query("SELECT * FROM vote WHERE (login_id = '{$_SESSION['id']}' AND actor_id = '{$_GET[ "id" ]}')");
     $voteinfo = $req6->fetch();
-    
+
 ?>
 
 <?php include("header.php"); ?>
@@ -150,6 +160,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
                 echo $error;
             }
             ?>
+
         </div>
 
     <?php
