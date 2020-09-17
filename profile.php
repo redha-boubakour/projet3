@@ -240,7 +240,7 @@ if (isset($_SESSION['id']))
     <div class="modify_info">
         <form method="post" class="form">
             <input class="inputs" type="password" name="new_password" placeholder="Votre nouveau mot de passe">
-            <input class="inputs" type="password" name="new_password_conf" placeholder="Confirmer votre nouveau mot de passe">
+            <input class="inputs" type="password" name="new_password_conf" placeholder="Confirmer votre mot de passe">
             <button type="submit" class="button" name="modify-pass-btn">Modifier</button>
         </form> 
     </div>

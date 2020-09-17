@@ -42,7 +42,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
                 'actor_id' => $actor_id,
                 'login_id' => $login_id
             ));
-            header('Location: pageActeur.php?id='.$actor_id);
+            header('Location: pageacteur.php?id='.$actor_id);
             $_SESSION['comment_created'] = "Votre commentaire a été rajouté.";
         }
         else
@@ -85,7 +85,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
             ");
             $req5->execute();
 
-            header('Location: pageActeur.php?id='.$actorinfo['id']);
+            header('Location: pageacteur.php?id='.$actorinfo['id']);
         }
         elseif (isset($_POST['negative-btn']))
         {
@@ -102,7 +102,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
             ");
             $req5->execute();
 
-            header('Location: pageActeur.php?id='.$actorinfo['id']);
+            header('Location: pageacteur.php?id='.$actorinfo['id']);
         }
     }
 

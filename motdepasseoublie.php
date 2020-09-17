@@ -72,11 +72,17 @@ require 'sql.php';
         <img class="logo_index" src="./images/logo.png" alt="logo">
         <div class="main">
             <h1 class="title">Mot de passe oublié ?</h1>
+
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
+
             <form method="post" class="form">
                 <input class="inputs" type="text" name="email" placeholder="Votre adresse mail" value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; } ?>">
 
                 <?php if(isset($_SESSION['email'])) : ?>
 
+                <p>Veuillez répondre à la question suivante : </p>
                 <p><?= $_SESSION['question']; ?></p>
                 <input class="inputs" type="text" name="answer" placeholder="Votre réponse">
 
@@ -84,15 +90,8 @@ require 'sql.php';
 
                 <button type="submit" class="button" name="submit">Valider</button>
             </form> 
-            
-            <?php if(isset($error)) : ?>
-                <div class="error"><p><?= $error ?></p></div>
-            <?php endif; ?>
-            
 
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>
-
-    
     </body>
 </html>

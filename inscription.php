@@ -86,6 +86,11 @@ if(isset($_POST['registration']))
         <img class="logo_index" src="./images/logo.png" alt="logo">
         <div class="main">
             <p class="title">Creer un compte</p>
+
+            <?php if(isset($error)) : ?>
+                <div class="error"><p><?= $error ?></p></div>
+            <?php endif; ?>
+
             <form method="post">
                 <input class="inputs" type="text" name="new_username" value="<?php if(isset($new_username)) { echo $new_username; } ?>" placeholder="Votre compte">
                 <input class="inputs" type="text" name="new_email" value="<?php if(isset($new_email)) { echo $new_email; } ?>" placeholder="Votre mail">
@@ -98,10 +103,6 @@ if(isset($_POST['registration']))
 
                 <button type="submit" class="button" name="registration">S'inscrire</button>
             </form>
-
-            <?php if(isset($error)) : ?>
-                <div class="error"><p><?= $error ?></p></div>
-            <?php endif; ?>
 
             <p class="other_page"><a href="index.php">Se connecter</p>
         </div>

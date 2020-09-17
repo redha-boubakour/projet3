@@ -57,7 +57,7 @@ if(isset($_POST['modify']))
             <h1 class="title">Changment de mot de passe</h1>
             <form method="post" class="form">
                 <p><input class="inputs" type="password" name="new_password" placeholder="Votre nouveau mot de passe"></p>
-                <p><input class="inputs" type="password" name="new_password_conf" placeholder="Confirmer votre nouveau mot de passe"></p>
+                <p><input class="inputs" type="password" name="new_password_conf" placeholder="Confirmer votre mot de passe"></p>
                 <button type="submit" class="button" name="modify">Modifier votre mot de passe</button>
             </form> 
             
