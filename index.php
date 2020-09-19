@@ -12,9 +12,7 @@ if(isset($_POST['connect']))
 
     if(!empty($loginconnect) AND !empty($passconnect)) 
     {
-        $requser =  $bdd->prepare('SELECT * FROM user WHERE username = ?');
-        $requser->execute(array($loginconnect));
-        $userinfo = $requser->fetch();
+        $userinfo = getUser($loginconnect);
         
         if ($userinfo['username'])
         {
@@ -62,7 +60,6 @@ if(isset($_POST['connect']))
     <body>
         <img class="logo_index" src="./images/logo.png" alt="logo">
         <div class="main">
-            <?php if (isset($_SESSION['account_created'])) {echo $_SESSION['account_created'];} ?>
             <h1 class="title">Connexion</h1>
 
             <?php if(isset($error)) : ?>

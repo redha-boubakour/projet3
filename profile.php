@@ -1,12 +1,13 @@
 <?php 
 session_start();
 
-if (isset($_SESSION['id']))
+if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'] AND $_SESSION['id'])
 {
     require 'sql.php';
 
     $id = $_SESSION['id'];
 
+    /* Modification du nom de compte */
     if(isset($_POST['modify-username-btn']))
     {
         $new_username = htmlspecialchars($_POST['new_username']);
@@ -25,7 +26,6 @@ if (isset($_SESSION['id']))
                 $req->execute();
 
                 $_SESSION['username'] = $new_username;
-
                 header('Location: profile.php');
                 exit();
             }
@@ -40,6 +40,7 @@ if (isset($_SESSION['id']))
         }
     }
 
+    /* Modification du mot de passe */
     if(isset($_POST['modify-pass-btn']))
     {
         $pass_hache = $_POST['new_password'];
@@ -71,6 +72,7 @@ if (isset($_SESSION['id']))
         }
     }
 
+    /* Modification de l'email */
     if(isset($_POST['modify-email-btn']))
     {
         $new_email = htmlspecialchars($_POST['new_email']);
@@ -91,7 +93,6 @@ if (isset($_SESSION['id']))
                         $req->execute();
 
                         $_SESSION['email'] = $new_email;
-
                         header('Location: profile.php');
                         exit();
                 }
@@ -109,9 +110,9 @@ if (isset($_SESSION['id']))
         {
             $error = 'le champ relatif au mail doit être complété.';
         }
-
     }
 
+    /* Modification du prénom */
     if(isset($_POST['modify-firstname-btn']))
     {
         $new_firstname = htmlspecialchars($_POST['new_firstname']);
@@ -126,7 +127,6 @@ if (isset($_SESSION['id']))
             $req->execute();
 
             $_SESSION['firstname'] = $new_firstname;
-
             header('Location: profile.php');
             exit();
         }
@@ -136,7 +136,8 @@ if (isset($_SESSION['id']))
         }
     }
 
-        if(isset($_POST['modify-lastname-btn']))
+    /* Modification du nom */
+    if(isset($_POST['modify-lastname-btn']))
     {
         $new_lastname = htmlspecialchars($_POST['new_lastname']);
 
@@ -150,7 +151,6 @@ if (isset($_SESSION['id']))
             $req->execute();
 
             $_SESSION['lastname'] = $new_lastname;
-
             header('Location: profile.php');
             exit();
         }
@@ -160,6 +160,7 @@ if (isset($_SESSION['id']))
         }
     }
 
+    /* Modification de la question */
     if(isset($_POST['modify-question-btn']))
     {
         $new_question = htmlspecialchars($_POST['new_question']);
@@ -174,7 +175,6 @@ if (isset($_SESSION['id']))
             $req->execute();
 
             $_SESSION['question'] = $new_question;
-
             header('Location: profile.php');
             exit();
         }
@@ -184,6 +184,7 @@ if (isset($_SESSION['id']))
         }
     }
 
+    /* Modification de la réponse */
     if(isset($_POST['modify-answer-btn']))
     {
         $new_answer = htmlspecialchars($_POST['new_answer']);
@@ -198,7 +199,6 @@ if (isset($_SESSION['id']))
             $req->execute();
 
             $_SESSION['answer'] = $new_answer;
-
             header('Location: profile.php');
             exit();
         }
@@ -212,19 +212,18 @@ if (isset($_SESSION['id']))
 
 <?php include("header.php"); ?>
 
-<div class="main">
-    <h1 class="title">Votre profil</h1>
-
+<div class="modify">
+    <h1 class="title">Votre profil</h1><br>
     <p>Nom du compte : <?php echo $_SESSION['username']; ?></p>
     <p>Adresse mail : <?php echo $_SESSION['email']; ?></p>
-    <p>Nom : <?php echo $_SESSION['firstname']; ?></p>
-    <p>Prénom : <?php echo $_SESSION['lastname']; ?></p>
+    <p>Prénom : <?php echo $_SESSION['firstname']; ?></p>
+    <p>Nom : <?php echo $_SESSION['lastname']; ?></p>
     <p>Question secrète : <?php echo $_SESSION['question']; ?></p>
     <p>Réponse secrète : <?php echo $_SESSION['answer']; ?></p>
 </div>
 
 <div class="modify">
-    <h1 class="title">Modifier vos informations</h1>
+    <h1 class="title">Modifier vos informations</h1><br>
 
     <?php if(isset($error)) : ?>
         <div class="error"><p><?= $error ?></p></div>
@@ -254,14 +253,14 @@ if (isset($_SESSION['id']))
 
     <div class="modify_info">
         <form method="post" class="form">
-            <input class="inputs" type="text" name="new_firstname" value="<?php if(isset($new_firstname)) { echo $new_firstname; } ?>" placeholder="Votre nom">
+            <input class="inputs" type="text" name="new_firstname" value="<?php if(isset($new_firstname)) { echo $new_firstname; } ?>" placeholder="Votre prénom">
             <button type="submit" class="button" name="modify-firstname-btn">Modifier</button>
         </form>
     </div> 
 
     <div class="modify_info">
         <form method="post" class="form">
-            <input class="inputs" type="text" name="new_lastname" value="<?php if(isset($new_lastname)) { echo $new_lastname; } ?>" placeholder="Votre prénom">
+            <input class="inputs" type="text" name="new_lastname" value="<?php if(isset($new_lastname)) { echo $new_lastname; } ?>" placeholder="Votre nom">
             <button type="submit" class="button" name="modify-lastname-btn">Modifier</button>
         </form>
     </div>

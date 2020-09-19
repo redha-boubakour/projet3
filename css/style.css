@@ -55,7 +55,7 @@
 .button:hover {
     color: #fe654f;
     background-color: white;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 a {
@@ -117,14 +117,18 @@ footer a {
     display: inline-block;
 }
 
+.sub_menu {
+    display: none;
+}
+
+.sub_menu li {
+    border-bottom: 2px solid #fe654f;
+}
+
 .nav_bar li :hover,
 .sub_menu li a :hover {
     transition: all 0.5s ease 0s;
     color: #fe654f;
-}
-
-.sub_menu {
-    display: none;
 }
 
 .nav_bar li:hover .sub_menu {
@@ -133,10 +137,6 @@ footer a {
     flex-direction: column;
     position: absolute;
     z-index: 1000;
-}
-
-.sub_menu li {
-    border-bottom: 2px solid #fe654f;
 }
 
 /* La page de profil */
@@ -148,7 +148,7 @@ footer a {
     background-color: #ffffff;
     width: 80%;
     height: auto;
-    margin: 4em auto;
+    margin: 1em auto;
     padding: 30px;
     border-radius: 1.5em;
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -167,6 +167,8 @@ footer a {
     display: flex;
     flex-direction: row;
 }
+
+/* La page lors de la connexion */
 
 /* La section de presentation */
 
@@ -242,13 +244,13 @@ footer a {
 
 .fiche_partenaire {
     display: flex;
+    flex-direction: column;
     border: #fe654f solid 2px;
     border-radius: 30px;
-    flex-direction: column;
-    margin: 20px 20px;
-    padding: 50px;
     justify-content: center;
     align-items: center;
+    margin: 30px;
+    padding: 20px 10px;
 }
 
 .tableau_de_bord {
@@ -258,7 +260,7 @@ footer a {
     width: 100%;
     text-align: center;
     align-items: center;
-    padding: 2% 2%;
+    padding: 0;
 }
 
 .comment_section {
@@ -335,9 +337,22 @@ footer li a:hover {
         margin: 20px auto;
     }
 
-    .nav_bar li {
-        max-width: 100%;
-        margin: 0 15px;
+    .nav_bar li:hover .sub_menu {
+        position: unset;
+    }
+
+    .modify {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 400px;
+        margin: 1em auto;
+    }
+
+    .modify .button {
+        margin: 0;
+        padding: 8px 5px;
     }
 
     .partenaire {

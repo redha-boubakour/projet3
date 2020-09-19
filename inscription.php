@@ -2,7 +2,7 @@
 
 require 'sql.php';
 
-// Vérification de la validité des informations
+/* Vérification de la validité des informations et création de compte */
 
 if(isset($_POST['registration']))
 {
@@ -28,21 +28,8 @@ if(isset($_POST['registration']))
                     $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
                     $date = new Datetime();
                     $created_at = $date->format('Y-m-d h:i:s');
-                    $req = $bdd->prepare('
-                        INSERT INTO user(username, email, password, question, answer, firstname, lastname, created_at)
-                        VALUES(:username, :email, :password, :question, :answer, :firstname, :lastname, :created_at)
-                    ');
-                    $req->execute(array(
-                        'username' => $new_username,
-                        'email' => $new_email,
-                        'password' => $pass_hache,
-                        'question' => $new_question,
-                        'answer' => $new_answer,
-                        'firstname' => $new_firstname,
-                        'lastname' => $new_lastname,
-                        'created_at' => $created_at
-                    ));
-                    $_SESSION['account_created'] = "Votre compte à été crée.";
+                    
+                    addUser($new_username, $new_email, $pass_hache, $new_question, $new_answer, $new_firstname, $new_lastname, $created_at);
                     header('Location: index.php');
                     exit();
                 }
@@ -96,8 +83,8 @@ if(isset($_POST['registration']))
                 <input class="inputs" type="text" name="new_email" value="<?php if(isset($new_email)) { echo $new_email; } ?>" placeholder="Votre mail">
                 <input class="inputs" type="password" name="new_password" placeholder="Votre mot de passe">
                 <input class="inputs" type="password" name="new_password_conf" placeholder="Confirmer votre mot de passe">
-                <input class="inputs" type="text" name="new_firstname" value="<?php if(isset($new_firstname)) { echo $new_firstname; } ?>" placeholder="Votre nom">
-                <input class="inputs" type="text" name="new_lastname" value="<?php if(isset($new_lastname)) { echo $new_lastname; } ?>" placeholder="Votre prénom">
+                <input class="inputs" type="text" name="new_firstname" value="<?php if(isset($new_firstname)) { echo $new_firstname; } ?>" placeholder="Votre prénom">
+                <input class="inputs" type="text" name="new_lastname" value="<?php if(isset($new_lastname)) { echo $new_lastname; } ?>" placeholder="Votre nom">
                 <input class="inputs" type="text" name="new_question" value="<?php if(isset($new_question)) { echo $new_question; } ?>" placeholder="Question secrète">
                 <input class="inputs" type="text" name="new_answer" value="<?php if(isset($new_answer)) { echo $new_answer; } ?>" placeholder="Réponse secrète">
 

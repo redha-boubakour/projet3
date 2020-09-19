@@ -14,14 +14,8 @@ if(isset($_POST['modify']))
         if($pass_hache == $pass_hache_conf)
         {
             $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
-            $req = $bdd->prepare("
-                        UPDATE user
-                        SET password = '$pass_hache'
-                        WHERE email = '$email'
-                    ");
-            $req->execute();
 
-            $_SESSION['password_modified'] = "Votre mot de passe a été modifié.";
+            updatePass($email, $pass_hache);
             header('Location: deconnexion.php');
             exit();
         }

@@ -82,7 +82,7 @@ require 'sql.php';
 
                 <?php if(isset($_SESSION['email'])) : ?>
 
-                <p>Veuillez répondre à la question suivante : </p>
+                <p>Veuillez répondre à la question suivante :</p>
                 <p><?= $_SESSION['question']; ?></p>
                 <input class="inputs" type="text" name="answer" placeholder="Votre réponse">
 
