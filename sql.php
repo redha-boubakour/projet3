@@ -16,7 +16,7 @@ function getUserEmailIfExist($email) {
         return $req->rowCount();
     }
 
-function getUserUsernamefExist($username) {
+function getUserUsernameIfExist($username) {
     global $bdd;
         $req = $bdd->prepare('SELECT * FROM user WHERE username = ?');
         $req->execute(array($username));

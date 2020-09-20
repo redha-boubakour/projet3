@@ -14,7 +14,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
         if(!empty($new_username))
         {
-            $existingusername = getUserUsernamefExist($new_username);
+            $existingusername = getUserUsernameIfExist($new_username);
 
             if($existingusername == 0)
             {    

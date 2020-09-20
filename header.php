@@ -14,7 +14,7 @@
 
     <body>       
         <header>
-            <img src="./images/logo.png" class="logo" id="header-img" alt="logo"/>
+            <img onclick="window.location.href='connecte.php'" src="./images/logo.png" class="logo" id="header-img" alt="logo"/>
             <nav class="nav_bar" id="nav_bar">
                 <ul class="menu">
                     <li><a href="connecte.php" class="nav_link"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?><a>
