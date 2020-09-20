@@ -84,28 +84,41 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         <div class="tableau_de_bord">
             <div class="total_comments"><?php echo $count ?> Commentaire(s)</div>
             <br>
+
+            <?php 
+                if($voteinfo['login_id'] == $_SESSION['id'] AND !is_null($voteinfo['vote']))
+                { 
+            ?>
+
+            <div class="evaluation">
+                <?php echo $actorinfo['positive_vote']; ?>
+                <img src="./images/thumbs-up.png">
+                <?php echo $actorinfo['negative_vote']; ?>
+                <img src="./images/thumbs-down.png">
+            </div>
+
+            <?php
+                }
+            ?>
+
+            <?php 
+                if(is_null($voteinfo['vote']))
+                { 
+            ?>
+
             <div class="evaluation">
                 <form method="post" class="form">
                     <?php echo $actorinfo['positive_vote']; ?>
-                    <button name="positive-btn" id="positive-btn"
-                        <?php 
-                        if($voteinfo['login_id'] == $_SESSION['id'] AND !is_null($voteinfo['vote']))
-                        { 
-                            echo ' Disabled'; 
-                        } 
-                        ?>
-                    ><img src="./images/thumbs-up.png"></button>
+                    <button name="positive-btn" id="positive-btn"><img src="./images/thumbs-up.png"></button>
                     <?php echo $actorinfo['negative_vote']; ?>
-                    <button name="negative-btn" id="negative-btn"
-                        <?php 
-                        if(isset($voteinfo['login_id']) AND !is_null($voteinfo['vote']))
-                        { 
-                            echo ' Disabled'; 
-                        } 
-                        ?>
-                    ><img src="./images/thumbs-down.png"></button>
+                    <button name="negative-btn" id="negative-btn"><img src="./images/thumbs-down.png"></button>
                 </form>
             </div>
+
+            <?php
+                }
+            ?>
+
         </div>
 
         <div class="new_comment">

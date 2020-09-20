@@ -233,6 +233,11 @@ footer a {
 
 /* la page de chaque acteur */
 
+.evaluation {
+    display: flex;
+    flex-direction: row;
+}
+
 .fiche_partenaire {
     display: flex;
     flex-direction: column;
