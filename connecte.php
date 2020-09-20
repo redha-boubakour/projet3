@@ -3,7 +3,6 @@ session_start();
 
 if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastname'] AND $_SESSION['id'])
 {
-
     require 'sql.php';
 
     $actorsinfo = getActors();

@@ -1,10 +1,10 @@
 <?php  
 session_start();
 
-require 'sql.php';
-
 if(isset($_POST['modify']))
 {
+    require 'sql.php';
+
     $pass_hache = $_POST['new_password'];
     $pass_hache_conf = $_POST['new_password_conf'];
     $email = $_SESSION['email'];
@@ -15,7 +15,7 @@ if(isset($_POST['modify']))
         {
             $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
 
-            updatePass($email, $pass_hache);
+            updatePass($pass_hache, $email);
             header('Location: deconnexion.php');
             exit();
         }

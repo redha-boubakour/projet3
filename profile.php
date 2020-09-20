@@ -18,13 +18,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
             if($existingusername == 0)
             {    
-                $req = $bdd->prepare("
-                    UPDATE user
-                    SET username = '$new_username'
-                    WHERE id = '$id'
-                ");
-                $req->execute();
-
+                updateUsername($new_username, $id);
                 $_SESSION['username'] = $new_username;
                 header('Location: profile.php');
                 exit();
@@ -45,19 +39,15 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     {
         $pass_hache = $_POST['new_password'];
         $pass_hache_conf = $_POST['new_password_conf'];
+        $email = $_SESSION['email'];
 
         if(!empty($_POST['new_password']) AND !empty($_POST['new_password_conf']))
         {
             if($pass_hache == $pass_hache_conf)
             {
                 $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
-                $req = $bdd->prepare("
-                            UPDATE user
-                            SET password = '$pass_hache'
-                            WHERE id = '$id'
-                        ");
-                $req->execute();
 
+                updatePass($pass_hache, $email);
                 header('Location: profile.php');
                 exit();
             }
@@ -85,16 +75,10 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
                 if($existingemail == 0)
                 {
-                        $req = $bdd->prepare("
-                            UPDATE user
-                            SET email = '$new_email'
-                            WHERE id = '$id'
-                        ");
-                        $req->execute();
-
-                        $_SESSION['email'] = $new_email;
-                        header('Location: profile.php');
-                        exit();
+                    updateEmail($new_email, $id);
+                    $_SESSION['email'] = $new_email;
+                    header('Location: profile.php');
+                    exit();
                 }
                 else
                 {
@@ -119,13 +103,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
         if(!empty($new_firstname))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET firstname = '$new_firstname'
-                WHERE id = '$id'
-            ");
-            $req->execute();
-
+            updateFirstname($new_firstname, $id);
             $_SESSION['firstname'] = $new_firstname;
             header('Location: profile.php');
             exit();
@@ -143,13 +121,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
         if(!empty($new_lastname))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET lastname = '$new_lastname'
-                WHERE id = '$id'
-            ");
-            $req->execute();
-
+            updateLastname($new_lastname, $id);
             $_SESSION['lastname'] = $new_lastname;
             header('Location: profile.php');
             exit();
@@ -167,13 +139,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
         if(!empty($new_question))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET question = '$new_question'
-                WHERE id = '$id'
-            ");
-            $req->execute();
-
+            updateQuestion($new_question, $id);
             $_SESSION['question'] = $new_question;
             header('Location: profile.php');
             exit();
@@ -191,13 +157,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
         if(!empty($new_answer))
         {
-            $req = $bdd->prepare("
-                UPDATE user
-                SET answer = '$new_answer'
-                WHERE id = '$id'
-            ");
-            $req->execute();
-
+            updateAnswer($new_answer, $id);
             $_SESSION['answer'] = $new_answer;
             header('Location: profile.php');
             exit();
@@ -279,7 +239,6 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         </form> 
     </div>
 </div>
-
 
 <?php
 }

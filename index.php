@@ -1,12 +1,11 @@
 <?php
 session_start();
 
-require 'sql.php';
-
 // Vérification de la validité des informations
-
 if(isset($_POST['connect']))
 {
+    require 'sql.php';
+
     $loginconnect = htmlspecialchars($_POST['login']);
     $passconnect = $_POST['pass'];
 

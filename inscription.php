@@ -1,11 +1,10 @@
 <?php  
 
-require 'sql.php';
-
 /* Vérification de la validité des informations et création de compte */
-
 if(isset($_POST['registration']))
 {
+    require 'sql.php';
+
     $new_username = htmlspecialchars($_POST['new_username']);
     $new_email = htmlspecialchars($_POST['new_email']);
     $pass_hache = $_POST['new_password'];

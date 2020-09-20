@@ -1,17 +1,15 @@
 <?php
 session_start();
+
 if(isset($_POST['submit']))
 {
-
-require 'sql.php';
+    require 'sql.php';
 
     $checkaccount = htmlspecialchars($_POST['email']);
 
     if(!empty($checkaccount)) 
     {
-        $requser = $bdd->prepare('SELECT * FROM user WHERE email = ?');
-        $requser->execute(array($checkaccount));
-        $userinfo = $requser->fetch();
+        $userinfo = getEmailIfExist($checkaccount);
 
         if(!empty($userinfo))
         {

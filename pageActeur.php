@@ -109,7 +109,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
         </div>
 
         <div class="new_comment">
-            <form method="post" class="form">
+            <form method="post" class="form" id="new_comment_form">
                 <textarea class="big_inputs" type="text" name="insert_comment" placeholder="Veuillez entrer votre commentaire.." cols="30" rows="10"></textarea>
                 <button type="submit" class="button" name="submit_comment_btn">Valider</button>
             </form>
