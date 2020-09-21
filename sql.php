@@ -4,8 +4,10 @@ require 'bdd.php';
 
 function getEmailIfExist($email) {
     global $bdd;
-        $requser = $bdd->prepare('SELECT * FROM user WHERE email = ?');
-        $requser->execute(array($email));
+        $requser = $bdd->prepare('SELECT * FROM user WHERE email = :email');
+        $requser->execute(array(
+            'email' => $email
+        ));
         return $requser->fetch();
     }
 
@@ -30,28 +32,57 @@ function getUser($loginconnect) {
         return $req->fetch();
     }
 
-function getActor() {
+function getActor($id) {
     global $bdd;
-        $req = $bdd->query("SELECT * FROM actor WHERE id = '{$_GET[ "id" ]}'");
+        $req = $bdd->prepare("SELECT * FROM actor WHERE id = :id");
+        $req->execute(array(
+            'id' => $id,
+        ));
         return $req->fetch();
     }
 
 function getActors() {
     global $bdd;
         $req = $bdd->query('SELECT * FROM actor ORDER BY id ASC');
-        return $req->fetchall();
+        return $req->fetchAll();
     }
 
-function getVote() {
+function getVote($loginId, $actorId) {
     global $bdd;
-        $req = $bdd->query("SELECT * FROM vote WHERE (login_id = '{$_SESSION['id']}' AND actor_id = '{$_GET[ "id" ]}')");
+        $req = $bdd->query("SELECT * FROM vote WHERE (login_id = $loginId AND actor_id = $actorId)");
         return $req->fetch();
     }
 
-function getTotalCommentsByActor() {
+function getTotalCommentsByActor($actorId) {
     global $bdd;
-        $req = $bdd->query("SELECT * FROM comment WHERE actor_id = '{$_GET[ "id" ]}'");
+        $req = $bdd->query("SELECT * FROM comment WHERE actor_id = $actorId");
         return $req->rowCount();
+    }
+
+function getVotesByActorId($actorId, $vote) {
+    global $bdd;
+        $req = $bdd->prepare('
+            SELECT *
+            FROM vote
+            WHERE actor_id = :actor_id AND vote = :vote
+        ');
+        $req->execute(array(
+            'actor_id' => $actorId,
+            'vote' => $vote,
+        ));
+        return $req->rowCount();
+    }
+
+function getCommentUserById() {
+    global $bdd;
+        $req = $bdd->query('
+            SELECT comment.content, comment.created_at, comment.actor_id, user.username
+            FROM comment
+            INNER JOIN user
+            ON comment.login_id = user.id
+            ORDER BY created_at DESC
+        ');
+        return $req->fetchAll();
     }
 
 function addUser($new_username, $new_email, $pass_hache, $new_question, $new_answer, $new_firstname, $new_lastname, $created_at) {
@@ -110,38 +141,6 @@ function addNegativeVote($negative_vote, $actor_id, $login_id) {
             'actor_id' => $actor_id,
             'login_id' => $login_id
         ));
-    }
-
-function joinCommentUserById() {
-    global $bdd;
-        $req = $bdd->query('
-            SELECT comment.content, comment.created_at, comment.actor_id, user.username
-            FROM comment
-            INNER JOIN user
-            ON comment.login_id = user.id
-            ORDER BY created_at DESC
-        ');
-        return $req->fetchAll();
-    }
-
-function updatePositiveVoteForActor() {
-    global $bdd;
-        $req = $bdd->prepare("
-            UPDATE actor
-            SET positive_vote = positive_vote + 1
-            WHERE id = '{$_GET[ "id" ]}'
-        ");
-        return $req->execute();
-    }
-
-function updateNegativeVoteForActor() {
-    global $bdd;
-        $req = $bdd->prepare("
-            UPDATE actor
-            SET negative_vote = negative_vote + 1
-            WHERE id = '{$_GET[ "id" ]}'
-        ");
-        return $req->execute();
     }
 
 function updateUsername($new_username, $id) {

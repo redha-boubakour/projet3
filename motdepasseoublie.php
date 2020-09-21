@@ -89,7 +89,7 @@ if(isset($_POST['submit']))
                 <button type="submit" class="button" name="submit">Valider</button>
             </form> 
 
-            <p class="other_page"><a href="index.php">Se connecter</p>
+            <a href="index.php" class="other_page">Se connecter</a>
         </div>
     </body>
 </html>

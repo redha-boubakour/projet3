@@ -71,8 +71,8 @@ if(isset($_POST['connect']))
                 <button type="submit" class="button" name="connect">Se connecter</button>
             </form> 
 
-            <p class="other_page"><a href="motdepasseoublie.php">Mot de passe oublié ?</p>
-            <p class="other_page"><a href="inscription.php">Créer un compte</p>
+            <a class="other_page" href="motdepasseoublie.php">Mot de passe oublié ?</a>
+            <a class="other_page" href="inscription.php">Créer un compte</a>
         </div>
     </body>
 </html>

@@ -17,7 +17,7 @@
             <img onclick="window.location.href='connecte.php'" src="./images/logo.png" class="logo" id="header-img" alt="logo"/>
             <nav class="nav_bar" id="nav_bar">
                 <ul class="menu">
-                    <li><a href="connecte.php" class="nav_link"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?><a>
+                    <li><a href="connecte.php" class="nav_link"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></a>
                         <ul class="sub_menu">
                             <li><a href="profile.php">profil</a></li>
                             <li><a href="deconnexion.php">Se déconnecter</a></li>

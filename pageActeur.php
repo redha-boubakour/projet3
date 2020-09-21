@@ -6,14 +6,24 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 {
     require 'sql.php';
 
+    $actorId = (int)$_GET['id'];
+    $loginId = $_SESSION['id'];
+
     /* Verification de l existance des acteurs et preparation de la table actor */
-    if(isset($_GET['id']))
+    if(isset($actorId))
     {
-        $actorinfo = getActor();
-    }
-    else
+        $actorinfo = getActor($actorId);
+
+        if(!$actorinfo)
+        {
+            header('Location: connecte.php');
+            exit();
+        }
+    } 
+    else 
     {
-        echo "Acteur inconnu";
+        header('Location: connecte.php');
+        exit();
     }
 
     /* création  de commentaire */
@@ -24,11 +34,9 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
             $insert_comment = htmlspecialchars($_POST['insert_comment']);
             $date = new Datetime();
             $created_at = $date->format('Y-m-d h:i:s');
-            $actor_id = $_GET['id'];
-            $login_id = $_SESSION['id'];
 
-            addComment($insert_comment, $created_at, $actor_id, $login_id);
-            header('Location: pageacteur.php?id='.$actor_id);
+            addComment($insert_comment, $created_at, $actorId, $loginId);
+            header('Location: pageacteur.php?id='.$actorId);
             exit();
         }
         else
@@ -38,35 +46,35 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     }
 
     /* la jointure entre les deux tables : comment & user */
-    $commentsinfo = joinCommentUserById();
+    $commentsinfo = getCommentUserById();
 
     /* le total des commentaires - acteur */
-    $count = getTotalCommentsByActor();
+    $count = getTotalCommentsByActor($actorId);
 
     /* Partie systeme de votes */
     if(isset($_POST['positive-btn']) OR isset($_POST['negative-btn']))
     {            
-        $actor_id = $_GET['id'];
-        $login_id = $_SESSION['id'];
         $positive_vote = 1;
         $negative_vote = 0;
 
         if(isset($_POST['positive-btn']))
         {
-            addPositiveVote($positive_vote, $actor_id, $login_id);
-            updatePositiveVoteForActor();
+            addPositiveVote($positive_vote, $actorId, $loginId);
             header('Location: pageacteur.php?id='.$actorinfo['id']);
+            exit();
         }
         elseif (isset($_POST['negative-btn']))
         {
-            addNegativeVote($negative_vote, $actor_id, $login_id);
-            updateNegativeVoteForActor();
+            addNegativeVote($negative_vote, $actorId, $loginId);
             header('Location: pageacteur.php?id='.$actorinfo['id']);
+            exit();
         }
     }
 
     /* preparation de la table vote */
-    $voteinfo = getVote();
+    $voteinfo = getVote($loginId, $actorId);
+    $votesPositive = getVotesByActorId($actorId, '1');
+    $votesNegative = getVotesByActorId($actorId, '0');
 
 ?>
 
@@ -82,24 +90,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
     <section class="comment_section">
             
         <div class="tableau_de_bord">
-            <div class="total_comments"><?php echo $count ?> Commentaire(s)</div>
-            <br>
-
-            <?php 
-                if($voteinfo['login_id'] == $_SESSION['id'] AND !is_null($voteinfo['vote']))
-                { 
-            ?>
-
-            <div class="evaluation">
-                <?php echo $actorinfo['positive_vote']; ?>
-                <img src="./images/thumbs-up.png">
-                <?php echo $actorinfo['negative_vote']; ?>
-                <img src="./images/thumbs-down.png">
-            </div>
-
-            <?php
-                }
-            ?>
+            <p class="total_comments"><?php echo $count ?> Commentaire(s)</p><br>
 
             <?php 
                 if(is_null($voteinfo['vote']))
@@ -108,22 +99,32 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
             <div class="evaluation">
                 <form method="post" class="form">
-                    <?php echo $actorinfo['positive_vote']; ?>
+                    <?php echo $votesPositive; ?>
                     <button name="positive-btn" id="positive-btn"><img src="./images/thumbs-up.png"></button>
-                    <?php echo $actorinfo['negative_vote']; ?>
+                    <?php echo $votesNegative; ?>
                     <button name="negative-btn" id="negative-btn"><img src="./images/thumbs-down.png"></button>
                 </form>
             </div>
 
             <?php
-                }
+                } else { 
             ?>
 
+            <div class="evaluation">
+                <?php echo $votesPositive; ?>
+                <img src="./images/thumbs-up.png" alt="Pouce positif">
+                <?php echo $votesNegative; ?>
+                <img src="./images/thumbs-down.png" alt="Pouce négatif">
+            </div>
+
+            <?php
+                }
+            ?>
         </div>
 
         <div class="new_comment">
             <form method="post" class="form" id="new_comment_form">
-                <textarea class="big_inputs" type="text" name="insert_comment" placeholder="Veuillez entrer votre commentaire.." cols="30" rows="10"></textarea>
+                <textarea class="big_inputs" name="insert_comment" placeholder="Veuillez entrer votre commentaire.." cols="30" rows="10"></textarea>
                 <button type="submit" class="button" name="submit_comment_btn">Valider</button>
             </form>
 

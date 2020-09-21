@@ -58,8 +58,6 @@ if(isset($_POST['modify']))
             <?php if(isset($error)) : ?>
                 <div class="error"><p><?= $error ?></p></div>
             <?php endif; ?>
-            
-            <p class="other_page"><a href="index.php">Se connecter</p>
         </div>
     </body>
 </html>
