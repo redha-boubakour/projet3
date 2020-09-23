@@ -33,8 +33,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
 
     <?php
     foreach ($actorsinfo as $actorinfo) :
-        $_GET['id'] = $actorinfo['id'];
-        $id = $_GET['id'];
+        $id = $actorinfo['id'];
 
         if (strlen($actorinfo['content']) > 100)
         {

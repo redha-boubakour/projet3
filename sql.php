@@ -49,13 +49,24 @@ function getActors() {
 
 function getVote($loginId, $actorId) {
     global $bdd;
-        $req = $bdd->query("SELECT * FROM vote WHERE (login_id = $loginId AND actor_id = $actorId)");
+        $req = $bdd->prepare('
+        SELECT * 
+        FROM vote 
+        WHERE login_id = :login_id AND actor_id = :actor_id
+        ');
+        $req->execute(array(
+            'login_id' => $loginId,
+            'actor_id' => $actorId,
+        ));
         return $req->fetch();
     }
 
 function getTotalCommentsByActor($actorId) {
     global $bdd;
-        $req = $bdd->query("SELECT * FROM comment WHERE actor_id = $actorId");
+        $req = $bdd->prepare("SELECT * FROM comment WHERE actor_id = :actor_id");
+        $req->execute(array(
+            'actor_id' => $actorId,
+        ));
         return $req->rowCount();
     }
 

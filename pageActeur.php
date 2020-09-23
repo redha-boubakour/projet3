@@ -93,7 +93,7 @@ if (isset($_SESSION['username']) AND $_SESSION['firstname'] AND $_SESSION['lastn
             <p class="total_comments"><?php echo $count ?> Commentaire(s)</p><br>
 
             <?php 
-                if(is_null($voteinfo['vote']))
+                if($voteinfo['login_id'] !== $loginId)
                 { 
             ?>
 

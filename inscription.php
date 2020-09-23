@@ -16,35 +16,44 @@ if(isset($_POST['registration']))
 
     if(!empty($_POST['new_username']) AND !empty($_POST['new_email']) AND !empty($_POST['new_password']) AND !empty($_POST['new_password_conf']) AND !empty($_POST['new_question']) AND !empty($_POST['new_answer']) AND !empty($_POST['new_firstname']) AND !empty($_POST['new_lastname']))
     {
-        if(filter_var($new_email, FILTER_VALIDATE_EMAIL))
-        {
-            $existingemail = getUserEmailIfExist($new_email);
-
-            if($existingemail == 0)
+        $existingusername = getUserUsernameIfExist($new_username);
+        
+        if($existingusername == 0)
+        {    
+            if(filter_var($new_email, FILTER_VALIDATE_EMAIL))
             {
-                if($pass_hache == $pass_hache_conf)
+                $existingemail = getUserEmailIfExist($new_email);
+
+                if($existingemail == 0)
                 {
-                    $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
-                    $date = new Datetime();
-                    $created_at = $date->format('Y-m-d h:i:s');
-                    
-                    addUser($new_username, $new_email, $pass_hache, $new_question, $new_answer, $new_firstname, $new_lastname, $created_at);
-                    header('Location: index.php');
-                    exit();
+                    if($pass_hache == $pass_hache_conf)
+                    {
+                        $pass_hache = password_hash($pass_hache, PASSWORD_BCRYPT);
+                        $date = new Datetime();
+                        $created_at = $date->format('Y-m-d h:i:s');
+                        
+                        addUser($new_username, $new_email, $pass_hache, $new_question, $new_answer, $new_firstname, $new_lastname, $created_at);
+                        header('Location: index.php');
+                        exit();
+                    }
+                    else
+                    {
+                        $error = "Vos Mots de passe ne correspondent pas.";
+                    }
                 }
                 else
                 {
-                    $error = "Vos Mots de passe ne correspondent pas.";
+                    $error = "Adresse mail déjà utilisée.";
                 }
             }
             else
             {
-                $error = "Adresse mail déjà utilisée.";
+                $error = "Votre adresse mail n'est pas valide.";
             }
         }
         else
         {
-            $error = "Votre adresse mail n'est pas valide.";
+            $error = "nom de compte déjà utilisé.";
         }
     }
     else
